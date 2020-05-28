@@ -1,52 +1,26 @@
-import { dContainer, sprite } from '../asprite';
+import aContainer from './acontainer';
 
-import CardGameView from './cardgame';
+import Forty from './forty';
 
 export default function Play(ctx) {
 
-  const { textures, canvas } = ctx;
+  let dForty = new Forty(this, ctx);
 
-  let bs = (() => {
-    let { width, height } = canvas;
-
-    return {
-      width,
-      height
-    };
-  })();
-
-  let dCardGame = new CardGameView(this, ctx, bs);
-
-  let components = [];
-  let container = dContainer();
+  let container = this.container = new aContainer();
   const initContainer = () => {
-
-    dCardGame.add(container);
-    components.push(dCardGame);
-
+    container.addChild(dForty);
   };
   initContainer();
 
-  this.init = data => {
-
-    dCardGame.init({});
-
-  };
-
-  this.add = (parent) => {
-    parent.addChild(container);
-  };
-
-  this.remove = () => {
-    container.parent.removeChild(container);
+  this.init = (data) => {
+    dForty.init({});
   };
 
   this.update = delta => {
-    components.forEach(_ => _.update(delta));
+    this.container.update(delta);
   };
 
   this.render = () => {
-    components.forEach(_ => _.render());
+    this.container.render();
   };
-
 }

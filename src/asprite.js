@@ -42,6 +42,10 @@ class AnimatedSprite extends PIXI.Sprite {
     this.lastTime = Date.now();
   }
 
+  textures(textures) {
+    this._textures = textures;
+  }
+
   update() {
     let now = Date.now(),
         lastTime = this.lastTime,

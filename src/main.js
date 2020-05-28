@@ -22,8 +22,6 @@ export function app(element, options) {
 
   PIXI.Loader.shared
     .add('mall', aBase('all.png'))
-    .add('greenbg', aBase('greenbg.png'))
-    .add('mcards', aBase('cards.png'))
     .add('mhud', aBase('hud.png'))
     .add('mbg', aBase('bg.png'))
     .add('mletters', aBase('letters.png'))
@@ -58,7 +56,7 @@ export function app(element, options) {
 
       canvas.withApp(app => {
 
-        play.add(app.stage);
+        app.stage.addChild(play.container.c);
 
         app.ticker.add(delta => {
 
@@ -72,10 +70,10 @@ export function app(element, options) {
         if (module.hot) {
           module.hot.accept('./play', function() {
             try {
-              play.remove();
+              app.stage.removeChild(play.container.c);
               play = new Play(ctx);
               play.init(data);
-              play.add(app.stage);
+              app.stage.addChild(play.container.c);
             } catch (e) {
               console.log(e);
             }

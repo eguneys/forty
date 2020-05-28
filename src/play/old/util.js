@@ -205,21 +205,7 @@ export function tapHandler(fn, events, boundsFn) {
       }
     }
   };
-}
-
-export function swipeHandler(onSwipe, events) {
-
-  return () => {
-    let { current } = events.data;
-
-    if (current && current.ending) {
-      let { swipe } = current.ending;
-
-      onSwipe(swipe);
-    }
-  };
-
-}
+};
 
 export const hitTest = (posX, posY, bounds) => {
   let left = bounds.x,
